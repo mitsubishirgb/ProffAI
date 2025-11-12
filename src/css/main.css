@@ -1,4 +1,5 @@
 @import "./themes/variables.css";
+@import "../css/components/nav.css";
 
 body { 
     background: var(--primary-background);
