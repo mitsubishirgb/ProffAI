@@ -1,5 +1,6 @@
 :root { 
-    --primary-background: #355C7D; 
-    --primary-background: -webkit-linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);  
-    --primary-background: linear-gradient(to right, #C06C84, #6C5B7B, #355C7D);
+    /* --primary-background: #355C7D;  */
+    --primary-background-path: "../assets/david-van-dijk-3LTht2nxd34-unsplash.jpg";
+    --primary-background: url("../assets/david-van-dijk-3LTht2nxd34-unsplash.jpg");
+    
 }

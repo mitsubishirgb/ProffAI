@@ -2,7 +2,14 @@
 @import "../css/components/nav.css";
 
 body { 
-    background: var(--primary-background);
+    margin: 0;
+  min-height: 100vh;
+
+  background-image: var(--primary-background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* move the focal point down — try different percentages */
+  background-position: center 40%;   /* center horizontally, 40% from top vertically */
 }
 
 
