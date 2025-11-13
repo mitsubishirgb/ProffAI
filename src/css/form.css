@@ -4,34 +4,34 @@ body {
     align-items: center;
 }
 
-#signup-box { 
+#form-box { 
     background-color: rgba(31, 31, 31, 0.4);
     border-radius: 10px;
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
-    width: 90% ;
+    width: 90%;
     max-width: 420px;
     padding: 40px 35px;
 
     display: flex;
     flex-direction: column;
-    gap: 25;  
+    gap: 25px;
 
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-#signup-box h2 {
-  font-weight: 500;
-  margin: 0;
-  color: white;
-  text-align: center;
-  margin-bottom: 35px;
-  font-style: bold;
-  font-size: 35px;
+#form-box h2 {
+    font-weight: 500;
+    margin: 0;
+    color: white;
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: bold;
+    font-size: 35px;
 }
 
-#signup-box button { 
+#form-box button { 
     background-color: darkslategrey;
     border-radius: 0px;
     border-color: transparent;
@@ -49,7 +49,7 @@ body {
         color 1.3s;
 }
 
-#signup-box button:hover { 
+#form-box button:hover { 
     filter: brightness(1.2);
     color: #fff;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
@@ -61,7 +61,13 @@ body {
     text-align: start;
 }
 
-#signup-box form input {
+.fullname { 
+    display: flex;
+    gap: 15px;
+    width: 100%; 
+}
+
+#form-box input {
     width: 100%;
     padding: 12px 14px;
     margin: 10px 0;
@@ -72,16 +78,21 @@ body {
     font-size: 16px;
     outline: none;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
-
-
-form input::placeholder {
-  color: white;
-  opacity: 1;
+.fullname input {
+    flex: 1; 
+    margin: 10px 0 10px 0; 
+    width: auto; 
 }
 
-.signup-link a { 
-    text-decoration: none;
+input:focus::placeholder { 
+    color: transparent;
+}
+
+input::placeholder {
     color: white;
+    opacity: 1;
 }
+
