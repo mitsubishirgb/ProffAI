@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+        }
+        
+    </style>
 </head>
-
 <body>
-    <div id="navbar-placeholder"></div>
+    <!-- LEFT SIDEBAR -->
+    <aside id="sidebar">
+        <div id="side-panel-placeholder"></div>
+    </aside>
 
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <div id="navbar-placeholder"></div> 
+        <div id="content">
+            <h1>Welcome to the chat</h1>
+            <p>This area will contain the conversation...</p>
+        </div>
+    </main>
+    
+    <script src="js/main.js"></script>
     <script>
-    fetch('components/navbar.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById('navbar-placeholder').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
+        load_component("components/navbar.html");
+        load_component("components/side-panel.html");
     </script>
-
 </body>
-</html>     
+</html>
