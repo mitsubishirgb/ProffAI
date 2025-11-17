@@ -1,5 +1,5 @@
 .navbar {
-    background: rgba(20, 20, 20, 0.5);
+    /* background: rgba(20, 20, 20, 0.5); */
     backdrop-filter: blur(30px) saturate(150%);
     -webkit-backdrop-filter: blur(30px) saturate(150%);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -13,8 +13,8 @@
 }
 
 .logo a {
-    color: #fff;
-    font-size: 1.5rem;
+    color: #37342F;
+    font-size: 1.9rem;
     font-weight: bold;
     text-decoration: none;
 }
@@ -26,9 +26,10 @@
 }
 
 .nav-links a {
-    color: white;
+    color: #37342F;
+    
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 720;
     transition: color 0.3s;
 }
 

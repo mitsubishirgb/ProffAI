@@ -17,8 +17,7 @@ body {
 aside#sidebar {
     width: 320px;                    
     flex-shrink: 0;
-    height: 100vh;
-    background: rgb(25, 70, 50);     
+    height: 100vh;  
   
 }
 
@@ -29,5 +28,65 @@ aside#sidebar {
     min-width: 0; 
 }
 
+#content { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#prompt-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 55px;
+    width: 800px;
+    border-radius: 50px;
+    background-color: whitesmoke ;
+    /* border: 1px solid #3b3b3b; */
+    padding: 8px 10px;
+    gap: 10px;
+}
+
+#prompt-bar input { 
+    height: inherit;
+    height: 100%;
+
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    color: black;
+    outline: none;
+    
+}
+
+#prompt-bar input ::placeholder {
+    color: blue;
+}
+
+#send-button {
+    height: 100%;
+    aspect-ratio: 1 / 1; 
+    background: rgb(25, 70, 50, 0.9);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+        
+
+}
+#send-button img {
+    width: 32px;
+    height: 32px;   
+}
+
+#send-button:hover { 
+    background-color: rgb(15, 50, 35);
+}
 
 
