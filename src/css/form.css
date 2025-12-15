@@ -41,7 +41,7 @@ body {
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-     transition: 
+    transition: 
         background-color 1.3s, 
         transform 1.2s, 
         filter 0.3s, 
@@ -95,4 +95,15 @@ input::placeholder {
     color: white;
     opacity: 1;
 }
+
+.error { 
+    text-align: start;
+    display: block;
+    color: red;
+    font-weight: 520;
+    padding-left: 3px;
+    font-size: 0.95 em;
+    margin-bottom: 10px;
+}
+
 

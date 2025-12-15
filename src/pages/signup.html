@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/form.css">
-    <title>Document</title>
+    <title>Sign up</title>
     
     <style>
         .login-link a { 
@@ -17,20 +17,42 @@
 <body>
     <div id="form-box">
         <h2>Create an account</h2>
-        <form action="" method="post">
+        <form id="signup-form" action="" method="" novalidate>
             <div class="fullname">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Lastname">
+                <div class="field">
+                    <input id="first-name" type="text" placeholder="Name">
+                    <span id="first-name-error" class="error"></span>
+                </div>
+                <div class="field">
+                    <input id="last-name" type="text" placeholder="Lastname">
+                    <span id="last-name-error" class="error"></span>
+                </div>
             </div>
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <input type="password" placeholder="Confirm Password">
+
+            <div class="field">
+                <input id="email" type="email" placeholder="Email" required>
+                <span id="email-error" class="error"></span>
+            </div>
+            
+            <div class="field">
+                <input id="password" type="password" placeholder="Password">
+                <span id="password-error" class="error"></span>
+            </div>
+            
+            <div class="field">
+                <input id="confirm-password" type="password" placeholder="Confirm Password">
+                <span id="confirm-password-error" class="error"></span>
+            </div>
+                  
             <div class="login-link">
-                    Already have an account? <a href="../../src/pages/login.html">Log in</a>
-                </div> 
+                Already have an account? <a href="../pages/login.html">Log in</a>
+            </div> 
+
             <button type="submit">Sign Up</button>
         </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.7.0/validator.min.js"></script>
+    <script src="../js/validate.js"></script>
 </body>
 </html>
