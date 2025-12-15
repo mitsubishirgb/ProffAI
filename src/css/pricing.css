@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+.back-home {
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 14px;
+
+  background: rgba(25, 70, 50, 0.9);
+  color: #e1f3e1;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.back-home:hover {
+  background: rgba(35, 90, 65, 1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  background: rgb(15, 50, 35); 
+  color: #fff;
+}
+
+.pricing-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #cde0c9; 
+  margin-bottom: 50px;
+}
+
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(25, 70, 50, 1); 
+  border-radius: 16px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.card .btn {
+  margin-top: auto;
+}
+
+.card:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,.5);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.price {
+  font-size: 42px;
+  margin: 15px 0;
+  color: #d4f0d4; 
+}
+
+.price span {
+  font-size: 16px;
+  color: #bcd9b0;
+}
+
+.desc {
+  color: #cde0c9;
+  margin-bottom: 25px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px;
+  text-align: left;
+}
+
+.card li {
+  margin: 12px 0;
+  color: #e1f3e1; 
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background: rgb(15, 50, 35);
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: rgba(25, 70, 50, 1);
+}
+
+.btn.primary {
+  background: #6ca86c; 
+}
+
+.btn.primary:hover {
+  background: #5b8f5b;
+}
+
+.btn.disabled {
+  background: #2f4f3f;
+  cursor: not-allowed;
+}
+
+
+.featured {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 70, 50, 1),
+    rgba(15, 50, 35, 1)
+  );
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8fd98f;
+  color: #0f321f;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.back-button img {
+    width: 30px;   
+    height: 30px;  
+    object-fit: contain;
+}
+
+.back-button {
+    position: fixed; 
+    top: 20px;
+    left: 20px;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 1000; 
+}

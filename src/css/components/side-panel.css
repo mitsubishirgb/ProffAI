@@ -4,7 +4,7 @@
     left: 0;
     height: 100%;
     width: 320px;
-    background-color: rgba(25, 70, 50, 1);
+    background-color: #2F4F3E;  
     color: white;
     padding: 15px;
     box-sizing: border-box;
@@ -74,3 +74,4 @@
 .menu-item:hover {
     background-color: rgb(15, 50, 35);
 }
+
