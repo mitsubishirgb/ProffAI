@@ -1,3 +1,18 @@
+<?php 
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') { 
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if(empty($email) || empty($password)) { 
+        $error = "All fields are required.";
+    } else { 
+        $success = "Login successful!";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,20 +34,28 @@
     <div id="form-box">  
     <h2>Log in to your account</h2>  
 
-        <form id="login-form" action="" method="post" novalidate>
+        <?php if (!empty($error)): ?>
+            <p class="error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($success)): ?>
+            <p class="success"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
+
+        <form id="login-form" action="login.php" method="post" novalidate>
 
             <div class="field">
-                <input id="email" type="email" placeholder="Email" required>
+                <input id="email" name="email" type="email" placeholder="Email" required>
                 <span id="email-error" class="error"></span>
             </div>
 
             <div class="field">
-                <input id="password" type="password" placeholder="Password" required>
+                <input id="password" name="password" type="password" placeholder="Password" required>
                 <span id="password-error" class="error"></span>
             </div>
 
             <div class="signup-link">
-                Don't have an account? <a href="../pages/signup.html">Create an account</a>
+                Don't have an account? <a href="signup.php">Create an account</a>
             </div>
 
             <button type="submit">Log In</button>

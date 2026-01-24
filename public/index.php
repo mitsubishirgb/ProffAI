@@ -13,13 +13,11 @@
     </style>
 </head>
 <body>
-    <aside id="sidebar">
-        <div id="side-panel-placeholder"></div>
-    </aside>
 
-    
+<?php include "components/side-panel.php"; ?>
+
     <main id="main">
-        <div id="navbar-placeholder"></div> 
+       <?php include "components/navbar.php"; ?>
         <div id="content">
             <div id="prompt-bar">
                 <input type="text" placeholder="Ask anything">
@@ -33,9 +31,6 @@
     </main>
     
     <script src="js/main.js"></script>
-    <script>
-        load_component("components/navbar.html");
-        load_component("components/side-panel.html");
-    </script>
+
 </body>
 </html>
