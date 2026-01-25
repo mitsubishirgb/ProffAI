@@ -1,4 +1,4 @@
-/* CONTENT */
+
 #content-introduction {
     display: flex;
     justify-content: center;
@@ -133,8 +133,6 @@
 
 
 
-
-/*PRICING*/
 .plans-preview-section {
     width: 95%;
     max-width: 1200px;
