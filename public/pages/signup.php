@@ -1,3 +1,24 @@
+<?php 
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') { 
+    $firstName = $_POST['first-name'] ?? '';
+    $lastName = $_POST['last-name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm-password'] ?? '';
+
+    if(empty($firstName) || empty($lastName) ||  empty($email) || 
+             empty($password) || empty($confirmPassword)) { 
+        $error = "All fields are required.";
+    } else { 
+        $success = "Signup successful!";
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +38,15 @@
 <body>
     <div id="form-box">
         <h2>Create an account</h2>
+
+        <?php if (!empty($error)): ?>
+            <p class="error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($success)): ?>
+            <p class="success"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
+            
         <form id="signup-form" action="" method="" novalidate>
             <div class="fullname">
                 <div class="field">
@@ -45,7 +75,7 @@
             </div>
                   
             <div class="login-link">
-                Already have an account? <a href="../pages/login.html">Log in</a>
+                Already have an account? <a href="login.php">Log in</a>
             </div> 
 
             <button type="submit">Sign Up</button>
