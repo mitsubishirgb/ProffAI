@@ -72,6 +72,6 @@
     </main>
    
     <script src="../js/main.js"></script>
-    <script src="../js/introduction.js"></script>
+    <script src="../js/slider.js"></script>
 </body>
 </html>

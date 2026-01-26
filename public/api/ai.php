@@ -1,5 +1,6 @@
 <?php
-$apiKey = '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';
+$config = require_once __DIR__ . '../../config/secrets.php';
+$apiKey = $config['OPENROUTER_API_KEY'];
 $apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
 $input = json_decode(file_get_contents('php://input'), true);
