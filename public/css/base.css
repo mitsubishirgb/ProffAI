@@ -1,5 +1,11 @@
 @import "./themes/variables.css";
 
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
 * {
     box-sizing: border-box;
 }
