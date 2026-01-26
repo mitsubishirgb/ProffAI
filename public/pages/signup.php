@@ -44,6 +44,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+
+    <div class="page-center">
+        
     <div id="form-box">
         <h2>Create an account</h2>
 
@@ -89,6 +92,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Sign Up</button>
         </form>
     </div>
+</div>
 
     <script src="../js/validate.js"></script>
 </body>
