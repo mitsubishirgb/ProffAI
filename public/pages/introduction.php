@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/introduction.css">
     <link rel="stylesheet" href="../css/components/navbar.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
     <title>Introduction</title>
 </head>
 
@@ -71,6 +72,8 @@
 
     </main>
    
+    <?php include "../components/footer.php"; ?>
+
     <script src="../js/main.js"></script>
     <script src="../js/slider.js"></script>
 </body>
