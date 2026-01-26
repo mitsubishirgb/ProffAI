@@ -1,24 +1,33 @@
 <?php 
+include_once '../../config/database.php';
+include_once '../../classes/User.php';
+
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') { 
+    $database = new Database();
+    $connection = $database->getConnection();
+    $user = new User($connection);
+
     $firstName = $_POST['first-name'] ?? '';
     $lastName = $_POST['last-name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm-password'] ?? '';
 
-    if(empty($firstName) || empty($lastName) ||  empty($email) || 
-             empty($password) || empty($confirmPassword)) { 
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($confirmPassword)) {
         $error = "All fields are required.";
-    } else { 
-        $success = "Signup successful!";
+    } elseif ($password !== $confirmPassword) {
+        $error = "Passwords do not match.";
+    } else {
+        if ($user->register($firstName, $lastName, $email, $password)) {
+            header("Location: login.php");
+            exit;
+        } else {
+            $error = "Error registering user!";
+        }
     }
 }
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +36,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/form.css">
     <title>Sign up</title>
-    
     <style>
         .login-link a { 
            text-decoration: none;
@@ -47,30 +55,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="success"><?= htmlspecialchars($success) ?></p>
         <?php endif; ?>
             
-        <form id="signup-form" action="" method="" novalidate>
+        <form id="signup-form" action="" method="post" novalidate>
             <div class="fullname">
                 <div class="field">
-                    <input id="first-name" type="text" placeholder="Name">
+                    <input id="first-name" name="first-name" type="text" placeholder="Name" value="<?= htmlspecialchars($_POST['first-name'] ?? '') ?>">
                     <span id="first-name-error" class="error"></span>
                 </div>
                 <div class="field">
-                    <input id="last-name" type="text" placeholder="Lastname">
+                    <input id="last-name" name="last-name" type="text" placeholder="Lastname" value="<?= htmlspecialchars($_POST['last-name'] ?? '') ?>">
                     <span id="last-name-error" class="error"></span>
                 </div>
             </div>
 
             <div class="field">
-                <input id="email" type="email" placeholder="Email" required>
+                <input id="email" name="email" type="email" placeholder="Email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
                 <span id="email-error" class="error"></span>
             </div>
             
             <div class="field">
-                <input id="password" type="password" placeholder="Password">
+                <input id="password" name="password" type="password" placeholder="Password">
                 <span id="password-error" class="error"></span>
             </div>
             
             <div class="field">
-                <input id="confirm-password" type="password" placeholder="Confirm Password">
+                <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password">
                 <span id="confirm-password-error" class="error"></span>
             </div>
                   
@@ -82,7 +90,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.7.0/validator.min.js"></script>
     <script src="../js/validate.js"></script>
 </body>
 </html>
