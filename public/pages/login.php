@@ -1,15 +1,33 @@
 <?php 
+session_start();
+include_once '../../config/database.php';
+include_once '../../classes/User.php';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') { 
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $db = new Database();
+    $connection = $db->getConnection();
+    $user = new User($connection);
 
-    if(empty($email) || empty($password)) { 
+    // Get form data
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (empty($email) || empty($password)) {
         $error = "All fields are required.";
-    } else { 
+    } else {
         $success = "Login successful!";
     }
+
+    // Attempt to log in
+    if ($user->login($email, $password)) {
+        header("Location: ../index.php"); // Redirect to home page
+        exit;
+    } else {
+        $error = "Invalid login credentials!";
+    }
 }
+
+
 
 ?>
 
