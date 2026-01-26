@@ -8,15 +8,15 @@ class User {
     }
 
     public function register($first_name, $last_name, $email, $password) {
+        echo "register()";
         $query = "INSERT INTO {$this->table_name} (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
 
         $stmt = $this->conn->prepare($query);
 
-        // Bind parameters
         $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':surname', $last_name);
+        $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', password_hash($password, PASSWORD_DEFAULT)); // Hashing the password
+        $stmt->bindParam(':password', password_hash($password, PASSWORD_DEFAULT)); 
 
         if ($stmt->execute()) {
             return true;
@@ -31,11 +31,10 @@ class User {
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        // Check if a record exists
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $row['password'])) {
-                // Start the session and store user data
+
                 session_start();
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
