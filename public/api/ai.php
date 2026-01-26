@@ -1,5 +1,5 @@
 <?php
-$apiKey = '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';
+$apiKey = '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';
 $apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
 $input = json_decode(file_get_contents('php://input'), true);
