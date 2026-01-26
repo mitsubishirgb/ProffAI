@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    overflow-y: auto; /* Ensures scrolling works smoothly */
+    overflow-y: auto; 
 }
 
 #content-introduction {
@@ -12,7 +12,7 @@ body {
     align-items: center;
     padding: 80px 20px;
     width: 100%;
-    margin-bottom: 40px; /* Changed from 20% to fixed px for consistent spacing and better scrolling */
+    margin-bottom: 40px;
 }
 
 .hero-card {
@@ -67,7 +67,6 @@ body {
     }
 }
 
-/* SLIDER */
 .slider-container {
     width: 95%;
     max-width: 1820px;
@@ -111,12 +110,12 @@ body {
 }
 
 .slider:hover {
-    animation-play-state: paused; /* Fixed selector; assumes JS adds animation for auto-sliding */
+    animation-play-state: paused;
 }
 
 @media (max-width: 768px) {
-    .slider-container h2 { font-size: 2.2rem; } /* Added for consistency */
-    .slider { max-height: 50vh; } /* Adjusted for better mobile scrolling */
+    .slider-container h2 { font-size: 2.2rem; }
+    .slider { max-height: 50vh; }
 }
 
 @media (max-width: 480px) {
@@ -152,7 +151,7 @@ body {
     color: white;
     padding: 40px 30px;
     border-radius: 20px;
-    text-align: center; /* Changed to center for consistency with hero */
+    text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -190,7 +189,7 @@ body {
 
 .mini-badge {
     position: absolute;
-    top: -15px; /* Adjusted slightly for better visibility without clipping */
+    top: -15px; 
     right: 25px;
     background: #8fd98f;
     color: #0f321f;

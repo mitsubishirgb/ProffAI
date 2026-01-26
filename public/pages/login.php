@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/form.css">
     <title>Log in</title>
     
@@ -31,37 +31,38 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 <body>
-    <div id="form-box">  
-    <h2>Log in to your account</h2>  
+    <div class="page-center">
+        <div id="form-box">  
+            <h2>Log in to your account</h2>  
 
-        <?php if (!empty($error)): ?>
-            <p class="error"><?= htmlspecialchars($error) ?></p>
-        <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <p class="error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
 
-        <?php if (!empty($success)): ?>
-            <p class="success"><?= htmlspecialchars($success) ?></p>
-        <?php endif; ?>
+            <?php if (!empty($success)): ?>
+                <p class="success"><?= htmlspecialchars($success) ?></p>
+            <?php endif; ?>
 
-        <form id="login-form" action="login.php" method="post" novalidate>
+            <form id="login-form" action="login.php" method="post" novalidate>
 
-            <div class="field">
-                <input id="email" name="email" type="email" placeholder="Email" required>
-                <span id="email-error" class="error"></span>
-            </div>
+                <div class="field">
+                    <input id="email" name="email" type="email" placeholder="Email" required>
+                    <span id="email-error" class="error"></span>
+                </div>
 
-            <div class="field">
-                <input id="password" name="password" type="password" placeholder="Password" required>
-                <span id="password-error" class="error"></span>
-            </div>
+                <div class="field">
+                    <input id="password" name="password" type="password" placeholder="Password" required>
+                    <span id="password-error" class="error"></span>
+                </div>
 
-            <div class="signup-link">
-                Don't have an account? <a href="signup.php">Create an account</a>
-            </div>
+                <div class="signup-link">
+                    Don't have an account? <a href="signup.php">Create an account</a>
+                </div>
 
-            <button type="submit">Log In</button>
-        </form>
-  
-</div>
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.7.0/validator.min.js"></script>
     <script src="../js/validate.js"></script>

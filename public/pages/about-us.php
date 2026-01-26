@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/about-us.css">
+    <link rel="stylesheet" href="../css/components/navbar.css">
     <link rel="stylesheet" href="../css/components/footer.css">
     <title>About-Us</title>
 </head>
 
 <body>
 
-    <div id="navbar-placeholder"></div>
+    <?php include "../components/navbar.php"; ?>
 
     <section class="about-section">
         <div class="about-container">
@@ -48,12 +49,9 @@
     </div>
     </section>
 
-    <div id="footer-placeholder"></div>
+    <?php include "../components/footer.php"; ?>
 
     <script src="../js/main.js"></script>
-    <script>
-        load_component("../components/navbar.html");
-        load_component("../components/footer.html")
-    </script>
+
 </body>
 </html>
