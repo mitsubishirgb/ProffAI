@@ -1,12 +1,13 @@
 <?php 
-include_once '../../config/database.php';
-include_once '../../classes/User.php';
+include_once '../../classes/Auth.php';
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') { 
-    $database = new Database();
-    $connection = $database->getConnection();
-    $user = new User($connection);
+    $auth = new Auth();
+    if ($auth->isLoggedIn()) {
+        header("Location: ../index.php");
+        exit;
+    }
 
     $firstName = $_POST['first-name'] ?? '';
     $lastName = $_POST['last-name'] ?? '';
@@ -19,15 +20,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($password !== $confirmPassword) {
         $error = "Passwords do not match.";
     } else {
-        if ($user->register($firstName, $lastName, $email, $password)) {
-            header("Location: login.php");
+        if ($auth->signup($firstName, $lastName, $email, $password)) {
+            header("Location: ../index.php");
             exit;
         } else {
-            $error = "Error registering user!";
+            $error = "User could not be created!";
         }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
