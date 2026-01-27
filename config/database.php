@@ -1,23 +1,24 @@
 <?php
 class Database {
-    private $host = 'localhost';
-    private $dbname = 'proffai';
-    private $username = 'root';
-    private $password = '';
-    private $conn;
+    private static $host = 'localhost';
+    private static $dbname = 'proffai';
+    private static $username = 'root';
+    private static $password = '';
+    private static ?PDO $conn = null;
 
-    public function __construct() {
-        try {
-            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, 
-            $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+
+    public static function getConnection() {
+        if (self::$conn == null) { 
+            try { 
+                self::$conn = new PDO("mysql:host=" . self::$host .
+                                    ";dbname=" . self::$dbname, self::$username, self::$password);
+                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Connection failed: " . $e->getMessage()); 
+            }
         }
-    }
-
-    public function getConnection() {
-        return $this->conn;
+        return self::$conn;
+    
     }
 }
 ?>

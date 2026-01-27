@@ -1,14 +1,13 @@
 <?php 
-session_start();
-include_once '../../config/database.php';
-include_once '../../classes/User.php';
+include_once '../../classes/Auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new Database();
-    $connection = $db->getConnection();
-    $user = new User($connection);
+    $auth = new Auth();
+    if ($auth->isLoggedIn()) {
+        header("Location: ../index.php");
+        exit;
+    }
 
-    // Get form data
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Attempt to log in
-    if ($user->login($email, $password)) {
+    if ($auth->login($email, $password)) {
         header("Location: ../index.php"); // Redirect to home page
         exit;
     } else {
@@ -53,14 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div id="form-box">  
             <h2>Log in to your account</h2>  
 
-            <?php if (!empty($error)): ?>
-                <p class="error"><?= htmlspecialchars($error) ?></p>
-            <?php endif; ?>
-
-            <?php if (!empty($success)): ?>
-                <p class="success"><?= htmlspecialchars($success) ?></p>
-            <?php endif; ?>
-
             <form id="login-form" action="login.php" method="post" novalidate>
 
                 <div class="field">
@@ -76,6 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="signup-link">
                     Don't have an account? <a href="signup.php">Create an account</a>
                 </div>
+
+                <?php if (!empty($error)): ?>
+                    <p class="error"><?= htmlspecialchars($error) ?></p>
+                <?php endif; ?>
+
+                <?php if (!empty($success)): ?>
+                    <p class="success"><?= htmlspecialchars($success) ?></p>
+                <?php endif; ?>
 
                 <button type="submit">Log In</button>
             </form>

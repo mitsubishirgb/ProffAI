@@ -1,3 +1,13 @@
+<?php
+include_once '../classes/Auth.php';
+
+    $auth = new Auth();
+    if (!$auth->isLoggedIn()) {
+        header("Location: pages/login.php");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
