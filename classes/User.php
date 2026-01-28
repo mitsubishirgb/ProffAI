@@ -34,5 +34,23 @@ class User {
         return false;
     }
 
+    public function findAll(): array {
+    $stmt = $this->db->query("SELECT id, first_name, last_name, email, role FROM users");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+    public function updateRole(int $id, string $role): bool {
+        $stmt = $this->db->prepare("UPDATE {$this->table_name} SET role = :role WHERE id = :id");
+        $stmt->bindParam(':role', $role);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function delete(int $id): bool {
+        $stmt = $this->db->prepare("DELETE FROM {$this->table_name} WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
 }
 ?>

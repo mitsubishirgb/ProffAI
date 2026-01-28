@@ -1,33 +1,27 @@
 <?php 
 include_once '../../classes/Auth.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $auth = new Auth();
-    if ($auth->isLoggedIn()) {
-        header("Location: ../index.php");
-        exit;
-    }
+$auth = new Auth();
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
         $error = "All fields are required.";
     } else {
-        $success = "Login successful!";
-    }
-
-    // Attempt to log in
-    if ($auth->login($email, $password)) {
-        header("Location: ../index.php"); // Redirect to home page
-        exit;
-    } else {
-        $error = "Invalid login credentials!";
+        if ($auth->login($email, $password)) {
+            if ($_SESSION['role'] === 'admin') {
+                header("Location: ../dashboard/admin.php");
+            } else {
+                header("Location: ../index.php");
+            }
+            exit;
+        } else {
+            $error = "Invalid login credentials!";
+        }
     }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>

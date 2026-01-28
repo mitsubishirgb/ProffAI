@@ -1,3 +1,9 @@
+<?php
+include_once '../../classes/Auth.php';
+
+    $auth = new Auth();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
