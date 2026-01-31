@@ -1,8 +1,7 @@
 <?php
 include_once '../../classes/Auth.php';
 
-    $auth = new Auth();
-
+$auth = new Auth();
 ?>
 
 <!DOCTYPE html>

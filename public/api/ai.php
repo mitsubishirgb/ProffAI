@@ -1,5 +1,5 @@
 <?php
-$config = require_once __DIR__ . '../../config/secrets.php';
+$config = require_once __DIR__ . '/../../config/secrets.php';
 $apiKey = $config['OPENROUTER_API_KEY'];
 $apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
 

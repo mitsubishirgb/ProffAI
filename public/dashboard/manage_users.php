@@ -1,7 +1,7 @@
 <?php
 require_once '../../classes/Auth.php';
 require_once '../../classes/User.php';
-require_once '../../config/Database.php';
+require_once '../../classes/Database.php';
 
 Auth::requireRole('admin');
 
@@ -28,9 +28,10 @@ $users = $userObj->findAll();
 <head>
     <meta charset="UTF-8">
     <title>Manage Users | Admin</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/manage_users.css">
+    <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
     <div class="sidebar">

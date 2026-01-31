@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
+require_once 'Database.php';
 require_once 'User.php';
 
 class Auth { 
@@ -48,7 +48,7 @@ class Auth {
             session_start();
         }
         if (!isset($_SESSION['user_id'])) {
-            header("Location: ../public/pages/login.php");
+            header("Location: ../pages/login.php");
             exit;
         }
     }
@@ -58,7 +58,7 @@ class Auth {
             session_start();
         }
         if (!isset($_SESSION['role']) || $_SESSION['role'] !== $role) {
-            header("Location: ../public/pages/login.php");
+            header("Location: ../pages/login.php");
             exit;
         }
     }

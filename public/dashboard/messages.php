@@ -1,7 +1,7 @@
 <?php
 require_once '../../classes/Auth.php';
 require_once '../../classes/ContactMessage.php';
-require_once '../../config/Database.php';
+require_once '../../classes/Database.php';
 
 Auth::requireRole('admin');
 
@@ -21,9 +21,10 @@ $messages = $msgObj->getAll();
 <head>
     <meta charset="UTF-8">
     <title>Messages | Admin</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/messages.css">
+    <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
     <div class="sidebar">
@@ -78,7 +79,6 @@ $messages = $msgObj->getAll();
         </main>
     </div>
 
-    <!-- Modal -->
     <div id="message-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

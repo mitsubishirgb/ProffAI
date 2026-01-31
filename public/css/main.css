@@ -12,9 +12,10 @@ body {
     height: 100vh;
     width: 100%;
     overflow: hidden;
+
 }
 
-.sidebar {
+/* .sidebar {
     width: 320px;
     height: 100vh;
     flex-shrink: 0;
@@ -25,11 +26,11 @@ body {
     transition: transform 0.3s ease;
     transform: translateX(0);
     z-index: 101;
-}
+} */
 
 @media (max-width: 768px) {
     .sidebar {
-        position: absolute;
+        position: relative;
         z-index: 102;
         transform: translateX(-100%);
         width: 280px;
@@ -99,16 +100,20 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.chat-message.ai {
+.chat-message.professor {
     justify-content: flex-start;
     gap: 15px;
 }
+
 
 .chat-message.user {
     justify-content: flex-end;
 }
 
-.chat-message.ai img {
+.active {
+    background-color: rgb(15, 50, 35);
+}
+.chat-message.professor img {
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -126,7 +131,7 @@ body {
     word-break: break-word;
 }
 
-.chat-message.ai .chat-bubble {
+.chat-message.professor .chat-bubble {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-bottom-left-radius: 4px;
