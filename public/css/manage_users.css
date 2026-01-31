@@ -1,0 +1,100 @@
+/* Page spacing */
+#main {
+    padding: 40px;
+}
+
+/* Section wrapper */
+main section {
+    background-color: #6f8f81;
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid #5e7d70;
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.18),
+        0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Admin Table */
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Table Header */
+.admin-table thead {
+    background: linear-gradient(
+        to bottom,
+        #1f4a3a,
+        #1a3c2f
+    );
+}
+
+.admin-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #e0eadd;
+    border-bottom: 1px solid #153228;
+}
+
+/* Rows */
+.admin-table tbody tr {
+    background-color: #7f9f91;
+    transition: background-color 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #6a8b7d;
+}
+
+/* Cells */
+.admin-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #5f7f72;
+    color: #0f241d;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Select */
+.admin-table select {
+    background-color: #e0eadd;
+    color: #1a3c2f;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Buttons */
+.admin-btn {
+    background-color: #1a3c2f;
+    color: #e0eadd;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.admin-btn:hover {
+    background-color: #14352a;
+}
+
+.admin-btn.delete {
+    background-color: #7a3f3f;
+}
+
+.admin-btn.delete:hover {
+    background-color: #623232;
+}
