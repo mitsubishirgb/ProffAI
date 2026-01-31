@@ -1,4 +1,5 @@
-<?php 
+<?php  
+session_start();
 include_once '../../classes/Auth.php';
 
 $auth = new Auth();
@@ -11,6 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = "All fields are required.";
     } else {
         if ($auth->login($email, $password)) {
+
+            $user = $auth->getUserByEmail($email);
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['first_name']; 
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+
             if ($_SESSION['role'] === 'admin') {
                 header("Location: ../dashboard/admin.php");
             } else {
@@ -32,14 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/form.css">
     <title>Log in</title>
-    
     <style>
         .signup-link a { 
             text-decoration: none;
             color: white;
         }
-        </style>
-
+    </style>
 </head>
 <body>
     <div class="page-center">
@@ -47,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h2>Log in to your account</h2>  
 
             <form id="login-form" action="login.php" method="post" novalidate>
-
                 <div class="field">
                     <input id="email" name="email" type="email" placeholder="Email" required>
                     <span id="email-error" class="error"></span>
@@ -66,16 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="error"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
 
-                <?php if (!empty($success)): ?>
-                    <p class="success"><?= htmlspecialchars($success) ?></p>
-                <?php endif; ?>
-
                 <button type="submit">Log In</button>
             </form>
         </div>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.7.0/validator.min.js"></script>
-    <script src="../js/validate.js"></script>
 </body>
 </html>

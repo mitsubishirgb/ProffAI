@@ -30,14 +30,14 @@ $users = $userObj->findAll();
     <title>Manage Users | Admin</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/manage_users.css">
 </head>
 <body>
     <div class="sidebar">
         <h2>Admin</h2>
         <a href="admin.php">Dashboard</a>
         <a href="manage_users.php" class="active">Manage Users</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a>
+        <a href="messages.php">Messages</a>
     </div>
 
     <div id="main">

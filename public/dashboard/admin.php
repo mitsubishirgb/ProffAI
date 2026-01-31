@@ -23,8 +23,7 @@ $totalUsers = count($users);
         <h2>Admin</h2>
         <a href="admin.php" class="active">Dashboard</a>
         <a href="manage_users.php">Manage Users</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a>
+        <a href="messages.php">Messages</a>
     </div>
 
     <div id="main">

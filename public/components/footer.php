@@ -23,7 +23,7 @@
 
     <div class="footer-links">
       <h4>Support</h4>
-      <a href="#">Help Center</a>
+      <a href="contact.php">Contact Us</a>
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
     </div>
