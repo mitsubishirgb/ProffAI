@@ -1,14 +1,13 @@
 <?php 
 include_once '../../classes/Auth.php';
 
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') { 
-    $auth = new Auth();
+$auth = new Auth();
     if ($auth->isLoggedIn()) {
         header("Location: ../index.php");
         exit;
-    }
+}
 
+if($_SERVER['REQUEST_METHOD'] === 'POST') { 
     $firstName = $_POST['first-name'] ?? '';
     $lastName = $_POST['last-name'] ?? '';
     $email = $_POST['email'] ?? '';

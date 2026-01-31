@@ -1,8 +1,12 @@
 <?php  
-session_start();
 include_once '../../classes/Auth.php';
 
 $auth = new Auth();
+
+if($auth->isLoggedIn()) {
+    header("Location: ../index.php");
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'] ?? '';

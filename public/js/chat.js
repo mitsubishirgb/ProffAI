@@ -1,101 +1,132 @@
 document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.querySelector('#send-button');
     const inputField = document.querySelector('#user-input');
+    const chatSession = document.getElementById("chat-session");
 
-    if (!submitBtn || !inputField) {
-        console.error("Critical Error: UI elements not found. Check HTML IDs.");
-        return;
+    if (!submitBtn || !inputField || !chatSession) return;
+
+    function scrollToBottom() {
+        chatSession.scrollTop = chatSession.scrollHeight;
     }
 
-    submitBtn.addEventListener('click', () => {
-        askAI();
-    });
+    function createMessageElement(role, text, isThinking = false) {
+        const msg = document.createElement("div");
+        msg.className = `chat-message ${role}`;
 
-    inputField.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            askAI();
+        if (role === 'professor') {
+            const avatar = document.createElement("img");
+            avatar.src = "assets/icons/cheerful-elderly-man-with-glasses.png";
+            avatar.alt = "ProffAI";
+            msg.appendChild(avatar);
         }
-    });
-});
 
-const chatSession = document.getElementById("chat-session");
+        const bubble = document.createElement("div");
+        bubble.className = "chat-bubble";
+        bubble.innerHTML = isThinking ? "Duke menduar..." : text.replace(/\n/g, '<br>');
 
-function addUserMessage(text) {
-    const msg = document.createElement("div");
-    msg.className = "chat-message user";
+        msg.appendChild(bubble);
+        chatSession.appendChild(msg);
+        scrollToBottom();
 
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble";
-    bubble.textContent = text;
+        return msg;
+    }
 
-    msg.appendChild(bubble);
-    chatSession.appendChild(msg);
-}
-
-function addAIMessage(text) {
-    const msg = document.createElement("div");
-    msg.className = "chat-message ai";
-
-    const avatar = document.createElement("img");
-    avatar.src = "assets/icons/cheerful-elderly-man-with-glasses.png";
-
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble";
-    bubble.textContent = text;
-
-    msg.append(avatar, bubble);
-    chatSession.appendChild(msg);
-}
-
-async function askAI() {
-    const input = document.getElementById("user-input");
-    const tmpInput = input.value.trim();
-
-    if (!tmpInput) return;
-
-    addUserMessage(tmpInput);
-    input.value = "";
-
-    addAIMessage("Thinking...");
-
-    try {
-        const response = await fetch('../api/ai.php', {
+    async function saveMessageToBackend(role, content) {
+        const response = await fetch('api/messages.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: tmpInput })
+            body: JSON.stringify({
+                chat_id: window.currentChatId,
+                role: role,
+                content: content
+            })
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP ${response.status}`);
         }
-
-        const data = await response.json();
-        console.log("AI RAW RESPONSE:", data);
-
-        let aiText = "";
-
-        // Groq / OpenAI format
-        if (data?.choices?.[0]?.message?.content) {
-            aiText = data.choices[0].message.content;
-        }
-
-        else if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-            aiText = data.candidates[0].content.parts[0].text;
-        }
-
-        else if (data?.error?.message) {
-            aiText = "Gabim nga AI: " + data.error.message;
-        }
-        // Unknown format
-        else {
-            throw new Error("Invalid API response structure");
-        }
-
-        document.querySelector('.chat-message.ai:last-child .chat-bubble').innerText = aiText;
-
-    } catch (error) {
-        console.error("AI Error:", error);
-        document.querySelector('.chat-message.ai:last-child .chat-bubble').innerText =
-            "Ndodhi një gabim. Provo përsëri.";
     }
-}
+
+    async function handleChat() {
+        const message = inputField.value.trim();
+        if (!message) return;
+
+        inputField.value = "";
+
+        try {
+            await saveMessageToBackend('user', message);
+            createMessageElement('user', message);
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+
+        const thinkingMsg = createMessageElement('professor', '', true);
+
+        try {
+            const response = await fetch('api/ai.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: message,
+                    chat_id: window.currentChatId || null
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (chatSession.contains(thinkingMsg)) {
+                chatSession.removeChild(thinkingMsg);
+            }
+
+            let aiText = "";
+            if (data?.choices?.[0]?.message?.content) {
+                aiText = data.choices[0].message.content;
+            } else if (data?.reply) {
+                aiText = data.reply;
+            } else if (data?.error) {
+                aiText = "Gabim: " + (data.error.message || JSON.stringify(data.error));
+            } else {
+                aiText = "Përgjigje e papritur nga serveri.";
+            }
+
+            await saveMessageToBackend('professor', aiText);
+            createMessageElement('professor', aiText);
+
+            if (data.chat_id && !window.currentChatId) {
+                window.currentChatId = data.chat_id;
+
+                const suggestedTitle = data.title || (message.slice(0, 30) + (message.length > 30 ? '...' : ''));
+
+                if (typeof addConversationToList === "function") {
+                    addConversationToList(data.chat_id, suggestedTitle);
+                }
+
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('chat_id', data.chat_id);
+                window.history.pushState({ path: newUrl.href }, '', newUrl.href);
+            }
+
+        } catch (error) {
+            console.error(error);
+            if (chatSession.contains(thinkingMsg)) {
+                const bubble = thinkingMsg.querySelector('.chat-bubble');
+                if (bubble) bubble.innerHTML = "Ndodhi një gabim. Provo sërish.";
+            }
+        }
+    }
+
+    submitBtn.addEventListener('click', handleChat);
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
+
+    inputField.focus();
+});

@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Database.php';
+
 class User {
     private PDO $db;
     private $table_name = 'users';
@@ -28,10 +30,8 @@ class User {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hash); 
 
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
+           
     }
 
     public function findAll(): array {

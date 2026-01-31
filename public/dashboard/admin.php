@@ -1,7 +1,7 @@
 <?php
 require_once '../../classes/Auth.php';
 require_once '../../classes/User.php';
-require_once '../../config/Database.php';
+require_once '../../classes/Database.php';
 
 Auth::requireRole('admin');
 
@@ -15,8 +15,9 @@ $totalUsers = count($users);
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
     <div class="sidebar">
@@ -56,3 +57,4 @@ $totalUsers = count($users);
     </div>
 </body>
 </html>
+
