@@ -1,5 +1,5 @@
 <?php
-require_once '../../config/database.php';
+require_once '../../classes/database.php';
 require_once '../../classes/ContactMessage.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

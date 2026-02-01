@@ -21,7 +21,6 @@ $messages = $msgObj->getAll();
 <head>
     <meta charset="UTF-8">
     <title>Messages | Admin</title>
-    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/messages.css">
     <link rel="stylesheet" href="../css/base.css">
@@ -32,6 +31,7 @@ $messages = $msgObj->getAll();
         <a href="admin.php">Dashboard</a>
         <a href="manage_users.php">Manage Users</a>
         <a href="messages.php" class="active">Messages</a>
+        <a href="../">Home</a>
     </div>
 
     <div id="main">

@@ -1,9 +1,8 @@
-/* Main spacing */
+
 #main {
     padding: 40px;
 }
 
-/* Section wrapper */
 .table-card {
     background-color: #6f8f81;
     border-radius: 16px;
@@ -15,14 +14,12 @@
     overflow-x: auto;
 }
 
-/* Table */
 table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
 }
 
-/* Table Header */
 thead {
     background: linear-gradient(to bottom, #1f4a3a, #1a3c2f);
 }
@@ -37,7 +34,6 @@ th {
     border-bottom: 1px solid #153228;
 }
 
-/* Rows */
 tbody tr {
     background-color: #7f9f91;
     transition: background-color 0.2s ease;
@@ -47,7 +43,6 @@ tbody tr:hover {
     background-color: #6a8b7d;
 }
 
-/* Cells */
 td {
     padding: 15px 20px;
     border-bottom: 1px solid #5f7f72;
@@ -55,7 +50,6 @@ td {
     vertical-align: top;
 }
 
-/* Message column */
 td.message {
     max-width: 400px;
     white-space: normal;
@@ -63,14 +57,12 @@ td.message {
     overflow-wrap: break-word;
 }
 
-/* Date column */
 td.date {
     font-size: 0.8rem;
     color: #203f35;
     white-space: nowrap;
 }
 
-/* Actions buttons */
 td.actions button {
     padding: 6px 14px;
     border-radius: 6px;
@@ -78,7 +70,6 @@ td.actions button {
     cursor: pointer;
 }
 
-/* Delete button */
 td.actions button.delete {
     background-color: #7a3f3f;
     color: #e0eadd;
@@ -90,7 +81,6 @@ td.actions button.delete:hover {
     background-color: #623232;
 }
 
-/* View button (like Send Message) */
 .view-msg-btn {
     background-color: #1a3c2f;
     color: #e0eadd;
@@ -106,7 +96,6 @@ td.actions button.delete:hover {
     background-color: #14352a;
 }
 
-/* Modal styling */
 .modal {
     display: none;
     position: fixed;

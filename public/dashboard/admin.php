@@ -9,13 +9,11 @@ $userObj = new User(Database::getConnection());
 $users = $userObj->findAll();
 $totalUsers = count($users);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
@@ -25,6 +23,7 @@ $totalUsers = count($users);
         <a href="admin.php" class="active">Dashboard</a>
         <a href="manage_users.php">Manage Users</a>
         <a href="messages.php">Messages</a>
+        <a href="../">Home</a>
     </div>
 
     <div id="main">
@@ -49,7 +48,7 @@ $totalUsers = count($users);
                 </div>
             </div>
 
-            <section>
+            <section class="activity-log">
                 <h3>Recent Activity</h3>
                 <p>No recent logs to display.</p>
             </section>
@@ -57,4 +56,3 @@ $totalUsers = count($users);
     </div>
 </body>
 </html>
-

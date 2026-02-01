@@ -28,7 +28,6 @@ $users = $userObj->findAll();
 <head>
     <meta charset="UTF-8">
     <title>Manage Users | Admin</title>
-    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/manage_users.css">
     <link rel="stylesheet" href="../css/base.css">
@@ -39,6 +38,7 @@ $users = $userObj->findAll();
         <a href="admin.php">Dashboard</a>
         <a href="manage_users.php" class="active">Manage Users</a>
         <a href="messages.php">Messages</a>
+        <a href="../">Home</a>
     </div>
 
     <div id="main">
