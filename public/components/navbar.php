@@ -4,6 +4,9 @@
         <a href="/index.php">ProffAI</a>  
     </div>
     <ul class="nav-links">
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+            <li><a href="/dashboard/admin.php">Dashboard</a></li>
+        <?php endif; ?>
         <li><a href="../pages/pricing.html">Upgrade</a></li>
         <li><a href="../pages/about-us.php">About Us</a></li>
         <?php if (!$auth->isLoggedIn()): ?>

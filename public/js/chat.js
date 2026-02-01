@@ -1,3 +1,52 @@
+function scrollToBottom() {
+    const chatSession = document.getElementById("chat-session");
+    if (chatSession) chatSession.scrollTop = chatSession.scrollHeight;
+}
+
+function createMessageElement(role, text, isThinking = false) {
+    const chatSession = document.getElementById("chat-session");
+    if (!chatSession) return;
+    
+    const msg = document.createElement("div");
+    msg.className = `chat-message ${role}`;
+
+    if (role === 'professor') {
+        const avatar = document.createElement("img");
+        avatar.src = "assets/icons/cheerful-elderly-man-with-glasses.png";
+        avatar.alt = "ProffAI";
+        msg.appendChild(avatar);
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+    bubble.innerHTML = isThinking ? "Duke menduar..." : text.replace(/\n/g, '<br>');
+
+    msg.appendChild(bubble);
+    chatSession.appendChild(msg);
+    scrollToBottom();
+
+    return msg;
+}
+
+async function fetchAndDisplayMessages(chatId) {
+    try {
+        const response = await fetch('api/messages.php?chat_id=' + encodeURIComponent(chatId));
+        if (!response.ok) throw new Error("Failed to fetch messages");
+        
+        const data = await response.json();
+        const messages = data.messages || [];
+        const chatSession = document.getElementById("chat-session");
+        if (chatSession) chatSession.innerHTML = '';
+        
+        createMessageElement('professor', "Përshëndetje! Si mund t'ju ndihmoj sot?");
+        messages.forEach(msg => {
+            createMessageElement(msg.role, msg.content);
+        });
+    } catch (error) {
+        console.error("Error loading messages:", error);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.querySelector('#send-button');
     const inputField = document.querySelector('#user-input');
@@ -5,30 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!submitBtn || !inputField || !chatSession) return;
 
-    function scrollToBottom() {
-        chatSession.scrollTop = chatSession.scrollHeight;
-    }
-
-    function createMessageElement(role, text, isThinking = false) {
-        const msg = document.createElement("div");
-        msg.className = `chat-message ${role}`;
-
-        if (role === 'professor') {
-            const avatar = document.createElement("img");
-            avatar.src = "assets/icons/cheerful-elderly-man-with-glasses.png";
-            avatar.alt = "ProffAI";
-            msg.appendChild(avatar);
-        }
-
-        const bubble = document.createElement("div");
-        bubble.className = "chat-bubble";
-        bubble.innerHTML = isThinking ? "Duke menduar..." : text.replace(/\n/g, '<br>');
-
-        msg.appendChild(bubble);
-        chatSession.appendChild(msg);
-        scrollToBottom();
-
-        return msg;
+    const params = new URLSearchParams(window.location.search);
+    const initialChatId = params.get('chat_id');
+    if (initialChatId) {
+        window.currentChatId = initialChatId;
+        fetchAndDisplayMessages(initialChatId);
     }
 
     async function saveMessageToBackend(role, content) {
@@ -41,15 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 content: content
             })
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
     }
 
     async function handleChat() {
         const message = inputField.value.trim();
         if (!message) return;
+
+        if (!window.currentChatId) {
+            const newId = await startNewChat();
+            window.currentChatId = newId; 
+        }
 
         inputField.value = "";
 
@@ -69,13 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: message,
-                    chat_id: window.currentChatId || null
+                    chat_id: window.currentChatId
                 })
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
             const data = await response.json();
 
@@ -83,39 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatSession.removeChild(thinkingMsg);
             }
 
-            let aiText = "";
-            if (data?.choices?.[0]?.message?.content) {
-                aiText = data.choices[0].message.content;
-            } else if (data?.reply) {
-                aiText = data.reply;
-            } else if (data?.error) {
-                aiText = "Gabim: " + (data.error.message || JSON.stringify(data.error));
-            } else {
-                aiText = "Përgjigje e papritur nga serveri.";
-            }
-
+            let aiText = data?.choices?.[0]?.message?.content || data?.reply || "Përgjigje e papritur.";
+            
             await saveMessageToBackend('professor', aiText);
             createMessageElement('professor', aiText);
-
-            if (data.chat_id && !window.currentChatId) {
-                window.currentChatId = data.chat_id;
-
-                const suggestedTitle = data.title || (message.slice(0, 30) + (message.length > 30 ? '...' : ''));
-
-                if (typeof addConversationToList === "function") {
-                    addConversationToList(data.chat_id, suggestedTitle);
-                }
-
-                const newUrl = new URL(window.location);
-                newUrl.searchParams.set('chat_id', data.chat_id);
-                window.history.pushState({ path: newUrl.href }, '', newUrl.href);
-            }
 
         } catch (error) {
             console.error(error);
             if (chatSession.contains(thinkingMsg)) {
                 const bubble = thinkingMsg.querySelector('.chat-bubble');
-                if (bubble) bubble.innerHTML = "Ndodhi një gabim. Provo sërish.";
+                if (bubble) bubble.innerHTML = "Ndodhi një gabim.";
             }
         }
     }
@@ -127,6 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
             handleChat();
         }
     });
-
     inputField.focus();
+});
+
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    const chatId = params.get('chat_id');
+    if (chatId) {
+        window.currentChatId = chatId;
+        fetchAndDisplayMessages(chatId);
+    }
 });

@@ -16,8 +16,8 @@ $totalUsers = count($users);
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <!-- <link rel="stylesheet" href="../css/main.css"> -->
-    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
     <div class="sidebar">

@@ -45,24 +45,13 @@ if ($chat_id) {
             
             <div id="content">
                 <div id="chat-session">
-                    <?php if (empty($messages)): ?>
+                    <?php if (!isset($_GET['chat_id'])): ?>
                         <div class="chat-message professor">
                             <img src="assets/icons/cheerful-elderly-man-with-glasses.png" alt="ProffAI Avatar">
                             <div class="chat-bubble">
                                 Përshëndetje! Unë jam ProffAI. Si mund t'ju ndihmoj sot?
                             </div>
                         </div>
-                    <?php else: ?>
-                        <?php foreach ($messages as $msg): ?>
-                            <div class="chat-message <?= htmlspecialchars($msg['role']) ?>">
-                                <?php if ($msg['role'] === 'professor'): ?>
-                                    <img src="assets/icons/cheerful-elderly-man-with-glasses.png" alt="ProffAI Avatar">
-                                <?php endif; ?>
-                                <div class="chat-bubble">
-                                    <?= nl2br(htmlspecialchars($msg['content'])) ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
 

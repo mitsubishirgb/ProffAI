@@ -89,7 +89,7 @@ class Conversation {
     }
 
     public function updateTitle(int $id, int $userId, string $title): bool {
-        $query = "UPDATE conversations SET title = :title, updated_at = NOW() 
+        $query = "UPDATE conversations SET title = :title 
                   WHERE id = :id AND user_id = :user_id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':title', $title);
